@@ -5,7 +5,7 @@ function compressImage(imagePath, file) {
     sharp.cache(false);
     file.isFile() && file.name.split(".")[1] !== "jpg" &&
         sharp(`${imagePath}/${file.name}`)
-            .jpeg({ quality: 80 })
+            .jpeg({ quality: 75, mozjpeg: true, progressive: true })
             .toFile(`${imagePath}/${file.name.split(".")[0]}.jpg`)
             .then(() => {
                 console.log(`Created ${file.name}.jpg`);
@@ -17,7 +17,7 @@ function compressImage(imagePath, file) {
             );
     file.isFile() &&
         sharp(`${imagePath}/${file.name}`)
-            .webp({ quality: 80 })
+            .webp({ quality: 75 })
             .toFile(`${imagePath}/${file.name.split(".")[0]}.webp`)
             .then(() => {
                 console.log(`Created ${file.name}.webp`);
@@ -29,7 +29,7 @@ function compressImage(imagePath, file) {
             );
     file.isFile() &&
         sharp(`${imagePath}/${file.name}`)
-            .avif({ quality: 80 })
+            .avif({ quality: 75, effort: 4 })
             .toFile(`${imagePath}/${file.name.split(".")[0]}.avif`)
             .then(() => {
                 console.log(`Created ${file.name}.avif`);
